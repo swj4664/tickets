@@ -15,15 +15,15 @@ $(document).ready(function(){
 	$("#check_module").click(function () {
 		IMP.request_pay({
 			pg: 'html5_inicis.INIpayTest', // 자신이 설정한 pg사 설정
-			pay_method: 'card',
+// 			pay_method: 'card',
 			merchant_uid: 'merchant_' + new Date().getTime(),
-			name: '개구리',// 상품명
-			amount: $("#amount").val(),
-			buyer_email: $("#umail").val() ,
-			buyer_name: $("#unm").val() ,
-			buyer_tel: $("#utel").val() ,
-			buyer_addr: $("#uaddr").val() ,
-			buyer_postcode: '123-456',
+			name: '너구리',// 상품명
+			amount: $("#amount").val(),//가격
+			buyer_email: $("#umail").val() ,//이메일
+			buyer_name: $("#unm").val() ,//주문자명
+			buyer_tel: $("#utel").val() ,//폰번
+			buyer_addr: $("#uaddr").val() ,//주소
+			buyer_postcode: '123-456',//우편번호
 			m_redirect_url: 'http://localhost:8090/payments/complete'//내 url 
 			}, function (rsp) {
 				console.log(rsp);
@@ -80,9 +80,10 @@ $(document).ready(function(){
 					$("#paylist").append("<br>주문상품: "+val.name);
 					$("#paylist").append("<br>주문자: "+val.buyer_name);
 					$("#paylist").append("<br>결제금액: "+val.amount);
-					
-			
-					
+					$("#paylist").append("<br>결제수단: "+val.pay_method);
+					$("#paylist").append("<br>구매처: "+val.pg_provider );
+					$("#paylist").append("<br>결제시각: "+val.started_at );
+					$("#paylist").append("<br>취소시각: "+val.cancelled_at );
 				}
 			},
 			error :  function(request, status){
@@ -90,6 +91,7 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
 	
 	$("#all_module").click(function(){
 		$.ajax({
@@ -102,13 +104,18 @@ $(document).ready(function(){
 				$.each(val, function(i, v){
 					$("#paylist").append("고유ID: "+v.imp_uid);
 					$("#paylist").append("<br>상점 거래ID: "+v.merchant_uid);
-					if(v.failed_at == 'cancelled' ) $("#paylist").append("<br><span style=\"color:red;font-weight:bold;\">주문취소</span>");
-					else if(v.failed_at == 'ready' ) $("#paylist").append("<br><span style=\"color:pink;font-weight:bold;\">결제오류</span>");
-					else if(v.failed_at == 'failed' ) $("#paylist").append("<br><span style=\"color:pink;font-weight:bold;\">결제오류</span>");
+					if(v.status == 'cancelled' ) $("#paylist").append("<br><span style=\"color:red;font-weight:bold;\">주문취소</span>");
+					else if(v.status == 'ready' ) $("#paylist").append("<br><span style=\"color:pink;font-weight:bold;\">결제오류</span>");
+					else if(v.status == 'failed' ) $("#paylist").append("<br><span style=\"color:pink;font-weight:bold;\">결제오류</span>");
 					else $("#paylist").append("<br><span style=\"color:blue;font-weight:bold;\">결제완료</span>");
 					$("#paylist").append("<br>주문상품: "+v.name);
 					$("#paylist").append("<br>주문자: "+v.buyer_name);
-					$("#paylist").append("<br>결제금액: "+v.amount+"<hr><br>");
+					$("#paylist").append("<br>결제금액: "+v.amount);
+					$("#paylist").append("<br>결제수단: "+v.pay_method);
+					$("#paylist").append("<br>구매처: "+v.pg_provider );
+					$("#paylist").append("<br>결제시각: "+v.started_at );
+					$("#paylist").append("<br>취소시각: "+v.cancelled_at+"<hr><br>" );
+					
 				});
 				
 			},
@@ -154,6 +161,6 @@ function orderList(){
 	
 	<p id="paylist"></p>
 </form>
-<a href="/noticeMail?email=chang9840@gmail.com">rr</a>
+<a href="/noticeMail?email=chang9840@gmail.com">메일쏘기</a>
 </body>
 </html>

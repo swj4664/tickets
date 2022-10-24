@@ -2,11 +2,13 @@ package com.ticket.biz.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +37,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
-public class IamportRestTest {
+public class PayController {
 	public static final String IMPORT_TOKEN_URL = "https://api.iamport.kr/users/getToken";
 	public static final String IMPORT_PAYMENTINFO_URL = "https://api.iamport.kr/payments/find/";
 	public static final String IMPORT_PAYMENTLIST_URL = "https://api.iamport.kr/payments/status/all";
@@ -188,6 +190,10 @@ public class IamportRestTest {
 				map.put("name",resNode.get("name").asText() );
 				map.put("buyer_name",resNode.get("buyer_name").asText() );
 				map.put("amount",resNode.get("amount").asText() );
+				map.put("pay_method",resNode.get("pay_method").asText() );
+				map.put("pg_provider",resNode.get("pg_provider").asText() );
+				map.put("started_at",resNode.get("started_at").asText() );
+				map.put("cancelled_at",resNode.get("cancelled_at").asText() );
 			}
 		} catch (Exception e) { 
 			e.printStackTrace(); 
@@ -220,7 +226,7 @@ public class IamportRestTest {
 			JsonNode rootNode = mapper.readTree(body); 
 			JsonNode resNode = rootNode.get("response").get("list"); 
 			System.out.println("555: " + resNode);
-			
+			String pg_provider_name="";
 			for(int i=0; i< resNode.size();i++) {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put("imp_uid",resNode.get(i).get("imp_uid").asText() );
@@ -229,7 +235,44 @@ public class IamportRestTest {
 				map.put("buyer_name",resNode.get(i).get("buyer_name").asText() );
 				map.put("amount",resNode.get(i).get("amount").asText() );
 				map.put("cancel_amount",resNode.get(i).get("cancel_amount").asText() );
-				map.put("failed_at",resNode.get(i).get("failed_at").asText() );
+				map.put("status",resNode.get(i).get("status").asText() );
+				
+				map.put("pay_method",resNode.get(i).get("pay_method").asText() );
+				if((resNode.get(i).get("pg_provider").asText().equals("html5_inicis"))){
+					 pg_provider_name="(주)케이지이니시스";
+				}
+				map.put("pg_provider", pg_provider_name);
+				
+				String unixTimeStamp = resNode.get(i).get("started_at").asText();
+			
+				   long timestamp = Long.parseLong(unixTimeStamp);
+				    Date date = new java.util.Date(timestamp*1000L); 
+				    SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+				    sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+9")); 
+				    String StartDatetime = sdf.format(date);
+				
+			
+				map.put("started_at", StartDatetime);
+				
+				 unixTimeStamp = resNode.get(i).get("cancelled_at").asText(); 
+				
+				 if(unixTimeStamp.equals("0")) {
+//					 unixTimeStamp="";
+				 }
+				  timestamp = Long.parseLong(unixTimeStamp);
+				     date = new java.util.Date(timestamp*1000L); 
+				    sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+				    sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+9")); 
+				    String endDatetime = sdf.format(date);
+				    
+				  
+				    if(endDatetime.equals("1970-01-01 09:00:00")) {
+				    	String cancelNull="";
+				    	  map.put("cancelled_at",cancelNull);
+				    }else {
+				 
+				    map.put("cancelled_at",endDatetime);
+				    }
 				list.add(map);
 			}
 			
