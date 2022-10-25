@@ -6,10 +6,11 @@
 <!-- 	<properties resource="db.properties" /> -->
 	<typeAliases>
 		<typeAlias type="com.ticket.biz.coupon.CouponVO" alias="coupon"></typeAlias>
+		<typeAlias type="com.ticket.biz.member.MemberVO" alias="member"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappings/coupon-mappings.xml" />
-	
+		<mapper resource="mappings/member-mappings.xml" />
 	</mappers>
 </configuration>
