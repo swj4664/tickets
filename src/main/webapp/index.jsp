@@ -11,6 +11,8 @@
 </head>
 <body>
 드랍다운눌러서 회원등록누르면 인덱스405떠서 오류떠요 아직수정중이예여
+<br>
+<br>
 <a href="/getMemberList">회원목록</a>
 <!-- <a href="/getMemberList">회원 결제</a> -->
 <!-- <a href="/getMemberList">관리자 결제목록</a> -->
