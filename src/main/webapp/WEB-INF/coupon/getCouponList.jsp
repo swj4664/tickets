@@ -1,28 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>쿠폰 목록</title>
+<%@ include file="/header.jsp"%>
 </head>
 <body>
-<table>
+<fmt:parseDate var="startDate_D"  value="${today }" pattern="yyyy-MM-dd"/>
+<fmt:parseNumber var="startDate_N" value="${startDate_D.time / (1000*60*60*24)}" integerOnly="true" />
 
+ 
+
+
+<div class="container">
+<h1 style="text-align: center;">쿠폰 목록</h1>
+<table class="table" style="width: 100%; border-collapse: collapse; table-layout: fixed;">
 <c:forEach items="${couponList}" var="coupon">
+<fmt:parseDate var="endDate_D" value="${coupon.c_date }"  pattern="yyyy-MM-dd"/>
+<fmt:parseNumber var="endDate_N" value="${endDate_D.time / (1000*60*60*24)}" integerOnly="true" /> 
 
 	<tr>
-	  <td class="">쿠폰명 : ${coupon.c_name}</td>
-	  <td class="">할인율 : ${coupon.c_per}%</td>	
-	  <td class="">만료날짜 : ${coupon.c_date}</td>
-	  <td class=""><button onclick="location.href='/getCoupon?c_num=${coupon.c_num}'">수정</button></td>
-	  <td class=""><button onclick="location.href='/deleteCoupon?c_num=${coupon.c_num}'">삭제 </button></td>
+	  <td class="text-center">쿠폰명 : ${coupon.c_name}</td>
+	  <td class="text-center">할인율 : ${coupon.c_per}%</td>	
+	  <td class="text-center">만료날짜 : ${coupon.c_date}</td>
+	    <td class="text-center text-danger"> ${endDate_N-startDate_N}일 남음 </td>
+	  <td class="text-center"><button class="btn btn-primary" onclick="location.href='/getCoupon?c_num=${coupon.c_num}'">수정</button></td>
+	  <td class="text-center"><button class="btn btn-danger" onclick="location.href='/deleteCoupon?c_num=${coupon.c_num}'">삭제 </button></td>
 	</tr>
 </c:forEach>
 </table>
-
- <a href="/">인덱스 ㄱ </a>
+</div>
   <div class="container ">
 			
 				<nav aria-label="Page navigation example">
