@@ -10,6 +10,37 @@ public class MemberVO {
 	private int mb_birth;
 	private String mb_email;
 	private int mb_check;
+	
+	private String searchCondition;
+	private String searchKeyword;
+	
+	private int offset;
+	
+	
+
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
 
 	public int getMb_no() {
 		return mb_no;

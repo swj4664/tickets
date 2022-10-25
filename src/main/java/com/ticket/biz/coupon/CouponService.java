@@ -15,7 +15,7 @@ public interface CouponService {
 
 		//쿠폰 조회
 		List<CouponVO> getCouponList(CouponVO vo);
-		
+
 		//쿠폰갯수
 		int totalCouponListCnt (CouponVO vo);
 		//쿠폰 검색

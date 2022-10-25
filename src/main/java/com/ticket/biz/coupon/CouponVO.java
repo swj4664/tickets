@@ -4,7 +4,8 @@ public class CouponVO {
 	private int c_num;
 	private String c_name;
 	private int c_per;
-	
+	private String c_date;
+
 	private int offset;
 
 	public int getC_num() {
@@ -38,7 +39,17 @@ public class CouponVO {
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}
-	
-	
-	
+
+	public String getC_date() {
+		return c_date;
+	}
+
+	public void setC_date(String c_date) {
+		this.c_date = c_date;
+	}
+
+
+
+
+
 }

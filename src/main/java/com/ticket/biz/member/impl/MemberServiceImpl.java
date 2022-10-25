@@ -1,5 +1,7 @@
 package com.ticket.biz.member.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +19,15 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.insertMember(vo);
 	}
 
+	// 회원목록 
+	@Override
+	public List<MemberVO> getMemberList(MemberVO vo) {
+		return memberDAO.getMemberList(vo);
+	}
+
+	@Override
+	public int totalMemberListCnt(MemberVO vo) {
+		return memberDAO.totalMemberListCnt(vo);
+	}
+	
 }

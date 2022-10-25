@@ -7,6 +7,24 @@
 		INSERT INTO MEMBER(MB_ID, MB_PW, MB_PHONE, MB_EMAIL) VALUES( #{mb_id}, #{mb_pw}, #{mb_phone}, #{mb_email})
 	</insert>
 	<!-- 멤버조회 -->
+	<select id="getMemberList" resultType="member">
+		SELECT * FROM MEMBER WHERE 1=1
+		<if test="searchCondition == 'MB_ID' "> AND MB_ID LIKE CONCAT('%', #{searchKeyword},'%')</if>
+		<if test="searchCondition == 'MB_NAME' "> AND MB_NAME LIKE CONCAT('%', #{searchKeyword},'%')</if>
+		<if test="searchCondition == 'MB_PHONE' "> AND MB_PHONE LIKE CONCAT('%', #{searchKeyword},'%')</if>
+		<if test="searchCondition == 'MB_EMAIL' "> AND MB_EMAIL LIKE CONCAT('%', #{searchKeyword},'%')</if>
+		ORDER BY MB_ID DESC
+		LIMIT 10 OFFSET #{offset}
+	</select>
+
+	<select id="totalMemberListCnt" resultType="_int">
+		SELECT Count(*) FROM MEMBER WHERE 1=1
+		<if test="searchCondition == 'MB_ID' "> AND MB_ID LIKE CONCAT('%', #{searchKeyword},'%')</if>
+		<if test="searchCondition == 'MB_NAME' "> AND MB_NAME LIKE CONCAT('%', #{searchKeyword},'%')</if>
+		<if test="searchCondition == 'MB_PHONE' "> AND MB_PHONE LIKE CONCAT('%', #{searchKeyword},'%')</if>
+		<if test="searchCondition == 'MB_EMAIL' "> AND MB_EMAIL LIKE CONCAT('%', #{searchKeyword},'%')</if>
+	</select>
+	
 	<!-- 멤버수정 -->
 	<!-- 멤버삭제 -->
 </mapper>
