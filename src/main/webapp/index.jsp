@@ -18,6 +18,8 @@
 <!-- <a href="/getMemberList">관리자 결제목록</a> -->
 <a href="/getCouponList"> 쿠폰목록</a>
 <a href="/pay">관리자 결제목록</a>
+<a href="/payUser">회원 결제</a>
+<a href="./myPayList">회원 결제 목록</a>
 
 
 

@@ -152,7 +152,7 @@ function orderList(){
 	<br><hr>	
 	
 	<h2>결제내역 관련</h2>
-	imp_uid: <input type="text" name="imp_uid" id="imp_uid" placeholder="imp_uid 입력"><br>
+<!-- 	imp_uid: <input type="text" name="imp_uid" id="imp_uid" placeholder="imp_uid 입력"><br> -->
 	merchant_uid: <input type="text" name="merchant_uid" id="merchant_uid" placeholder="merchant_uid 입력"><br>
 	<button id="cancel_module" type="button">취소하기</button>
 	<button id="list_module" type="button">결제완료목록조회</button>

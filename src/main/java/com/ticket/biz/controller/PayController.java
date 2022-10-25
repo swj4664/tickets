@@ -27,6 +27,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ticket.biz.coupon.CouponVO;
+import com.ticket.biz.pay.PayService;
+import com.ticket.biz.pay.PayVO;
 
 @Controller
 public class PayController {
@@ -130,8 +134,8 @@ public class PayController {
 		} 
 	}
 	
-	//상품결제 폼 호출
-	@RequestMapping(value={"/pay", "/"}, method=RequestMethod.GET)
+	//상품결제 폼 호출 (관리자 결제목록)
+	@RequestMapping(value={"/pay"}, method=RequestMethod.GET)
 	public String pay(HttpServletRequest request, Model model) {
 		String nm = request.getParameter("unm");
 		// 값은 아임포트의 가맹점 식별코드 입력
@@ -139,8 +143,18 @@ public class PayController {
 		return "admin/adminPay";
 	}
 	
+	//상품결제 폼 호출 (회원 결제)
+		@RequestMapping(value={"/payUser"}, method=RequestMethod.GET)
+		public String pay1(HttpServletRequest request, Model model) {
+			String nm = request.getParameter("unm");
+			// 값은 아임포트의 가맹점 식별코드 입력
+			model.addAttribute("impKey", "imp32470313"); 
+			return "views/pay";
+		}
+	
+	
 	//결제 진행 폼=> 이곳에서 DB저장 로직도 추가하기
-	@RequestMapping(value="/pay", method=RequestMethod.POST)
+	@RequestMapping(value="/payUser", method=RequestMethod.POST)
 	public void payment(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		String nm = request.getParameter("unm");
 		String amount = request.getParameter("amount");
@@ -328,7 +342,36 @@ public class PayController {
 //			}
 //			return list; 
 //		} 
-//		 
-		 
+
+	@Autowired
+	private PayService payService;
+	
+	// 글 목록
+		@RequestMapping("/myPayList")
+		public String getPayListPost(PayVO vo, Model model) {
+
+//			//총 목록 수
+//			int totalPageCnt = couponService.totalCouponListCnt(vo);
+//			//현재 페이지 설정
+//			int nowPage = Integer.parseInt(nowPageBtn==null || nowPageBtn.equals("") ? "1" :nowPageBtn);
+//			System.out.println("totalPageCnt: "+totalPageCnt +", nowPage: "+nowPage);
+//			//한페이지당 보여줄 목록 수
+//			int onePageCnt = 10;
+//			//한 번에 보여질 버튼 수
+//			int oneBtnCnt = 5;
+//
+//			PagingVO pvo = new PagingVO(totalPageCnt, onePageCnt, nowPage, oneBtnCnt);
+//			vo.setOffset(pvo.getOffset());
+//
+//			Date now = new Date();
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+//			 String today = sdf.format(now);
+//			 
+//			model.addAttribute("today",today); 
+//			model.addAttribute("paging", pvo);
+			model.addAttribute("payList", payService.getPayList(vo));
+			return "views/myPay";
+		}
+
 
 	}
