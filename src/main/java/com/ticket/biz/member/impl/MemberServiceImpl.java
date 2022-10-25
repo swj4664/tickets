@@ -2,6 +2,8 @@ package com.ticket.biz.member.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,17 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberDAO memberDAO;
+
+	@Override
+	public MemberVO loginCheck(MemberVO vo) {
+		return memberDAO.loginCheck(vo);
+	}
+
+	@Override
+	public void logout(HttpSession session) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void insertMember(MemberVO vo) {
