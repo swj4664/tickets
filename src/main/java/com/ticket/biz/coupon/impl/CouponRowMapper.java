@@ -13,9 +13,9 @@ public class CouponRowMapper implements RowMapper<CouponVO> {
 	@Override
 	public CouponVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		CouponVO coupon = new CouponVO();
-		coupon.setC_NUM(rs.getInt("c_num"));
-		coupon.setC_NAME(rs.getString("c_name"));
-		coupon.setC_PER(rs.getInt("c_per"));
+		coupon.setC_num(rs.getInt("c_num"));
+		coupon.setC_name(rs.getString("c_name"));
+		coupon.setC_per(rs.getInt("c_per"));
 		
 		return coupon;
 	}
