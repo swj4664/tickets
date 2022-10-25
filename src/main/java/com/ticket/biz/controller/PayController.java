@@ -136,7 +136,7 @@ public class PayController {
 		String nm = request.getParameter("unm");
 		// 값은 아임포트의 가맹점 식별코드 입력
 		model.addAttribute("impKey", "imp32470313"); 
-		return "pay";
+		return "admin/adminPay";
 	}
 	
 	//결제 진행 폼=> 이곳에서 DB저장 로직도 추가하기
