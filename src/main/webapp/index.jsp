@@ -20,13 +20,9 @@
 <a href="/pay">관리자 결제목록</a>
 <a href="/payUser">회원 결제</a>
 <a href="./myPayList">회원 결제 목록</a>
-<<<<<<< HEAD
-
-
-=======
 <a href="login.jsp">로그인</a>
 <a href="insertMember.jsp">회원가입</a>
->>>>>>> f82eabd (2022-10-26 09:45)
+
 
 
    <div class="container">
