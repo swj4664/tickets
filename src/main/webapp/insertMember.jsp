@@ -326,6 +326,7 @@ html, body {
 								<div class="mx-auto" id="footer">
 									<button id="conRegister" type="submit" class="btn btn-dark">회원가입</button>
 								</div>
+								</div>
 						</form>
 					</div>
 				</div>
