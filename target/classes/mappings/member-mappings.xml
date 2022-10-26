@@ -4,9 +4,14 @@
 <mapper namespace="MemberDAO">
 	<!-- 멤버등록 -->
 	<insert id="insertMember">
-		INSERT INTO MEMBER(MB_ID, MB_PW, MB_PHONE, MB_EMAIL) VALUES( #{mb_id}, #{mb_pw}, #{mb_phone}, #{mb_email})
+		INSERT INTO MEMBER(MB_ID, MB_PW, MB_PHONE, MB_EMAIL)
+		VALUES( #{mb_id}, #{mb_pw}, #{mb_phone}, #{mb_email})
 	</insert>
-	
+
+	<!-- 로그인 -->
+	<select id="loginCheck" resultType="member">SELECT * FROM MEMBER WHERE
+		MB_ID = #{mb_id} AND MB_PW = #{mb_pw} </select>
+
 	<!-- 멤버조회 -->
 	<select id="getMemberList" resultType="member">
 		SELECT * FROM MEMBER WHERE 1=1
@@ -25,7 +30,7 @@
 		<if test="searchCondition == 'MB_PHONE' "> AND MB_PHONE LIKE CONCAT('%', #{searchKeyword},'%')</if>
 		<if test="searchCondition == 'MB_EMAIL' "> AND MB_EMAIL LIKE CONCAT('%', #{searchKeyword},'%')</if>
 	</select>
-	
+
 	<!-- 멤버수정 -->
 	<!-- 멤버삭제 -->
 </mapper>
