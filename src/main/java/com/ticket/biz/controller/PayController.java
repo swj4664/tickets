@@ -36,7 +36,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ticket.biz.coupon.CouponVO;
 import com.ticket.biz.pay.PayService;
 import com.ticket.biz.pay.PayVO;
 

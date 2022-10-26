@@ -6,8 +6,8 @@ public class MemberVO {
 	private String mb_pw;
 	private String mb_name;
 	private String mb_address;
-	private int mb_phone;
-	private int mb_birth;
+	private String mb_phone;
+	private String mb_birth;
 	private String mb_email;
 	private int mb_check;
 	
@@ -82,19 +82,19 @@ public class MemberVO {
 		this.mb_address = mb_address;
 	}
 
-	public int getMb_phone() {
+	public String getMb_phone() {
 		return mb_phone;
 	}
 
-	public void setMb_phone(int mb_phone) {
+	public void setMb_phone(String mb_phone) {
 		this.mb_phone = mb_phone;
 	}
 
-	public int getMb_birth() {
+	public String getMb_birth() {
 		return mb_birth;
 	}
 
-	public void setMb_birth(int mb_birth) {
+	public void setMb_birth(String mb_birth) {
 		this.mb_birth = mb_birth;
 	}
 
