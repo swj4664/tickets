@@ -170,30 +170,32 @@ html, body {
 	$(function() {
 		//핸드폰 번호 인증 
 		var code2 = "";
-		
+		var emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		var email = $("#mb_email");
+
 		/* 핸드폰 인증번호 발송 start */
 		$("#phoneChk").click(
 				function() {
 					alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
-					var phone = $("#phone").val();
+					var phone = $("#mb_phone").val();
 
 					$.ajax({
 						type : "GET",
-						url : "phoneCheck.do?phone=" + phone,
+						url : "phoneCheck?mb_phone=" + phone,
 						cache : false,
 						success : function(data) {
 							if (data == "error") {
 								alert("휴대폰 번호가 올바르지 않습니다.")
 								$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
 								$(".successPhoneChk").css("color", "red");
-								$("#phone").attr("autofocus", true);
+								$("#mb_phone").attr("autofocus", true);
 							} else {
 								$("#phone2").attr("disabled", false);
 								$("#phoneChk2").css("display", "inline-block");
 								$(".successPhoneChk").text(
 										"인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
 								$(".successPhoneChk").css("color", "green");
-								$("#phone").attr("readonly", true);
+								$("#mb_phone").attr("readonly", true);
 								code2 = data;
 							}
 						}
@@ -201,7 +203,7 @@ html, body {
 				});
 		/* 핸드폰 인증번호 발송 end */
 
-		/* 인증번호 일치 start */
+		/* 핸드폰 인증번호 일치 여부 start */
 		$("#phoneChk2").click(function() {
 			if ($("#phone2").val() == code2) {
 				$(".successPhoneChk").text("인증번호가 일치합니다.");
@@ -215,11 +217,9 @@ html, body {
 				$(this).attr("autofocus", true);
 			}
 		});
-		/* 인증번호 일치 end */
+		/* 핸드폰 인증번호 일치 여부 end */
 
 		/* 이메일 인증 발송 start */
-		var emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-		var email = $("#email");
 		$("#sendMail").on("click", function() {
 			if (email == "") {
 				alert("이메일을 입력하지 않았습니다.");
@@ -235,6 +235,7 @@ html, body {
 						email : email.val()
 					},
 					success : function(data) {
+						console.log(data);
 						if (data == 'ok') {
 							alert("인증번호를 발송했습니다.");
 							$("#emailCheck").removeAttr("disabled");
@@ -252,88 +253,105 @@ html, body {
 			}
 		});
 		/* 이메일 인증 발송 end */
+
 	});
+	/* 이메일 인증번호 일치 여부 start */
+	function qweemailCheck() {
+		var emailCheck = $("#emailCheck").val();
+		if (emailCheck == "") {
+			alert("인증번호를 입력하지 않았습니다.");
+		} else {
+			$.ajax({
+				type : 'POST',
+				url : 'email_Check',
+				data : {
+					emailCheck : emailCheck
+				},
+				success : function(data) {
+					if (data == true) {
+						alert("인증되었습니다.");
+					} else {
+						alert("인증번호가 일치하지 않습니다.");
+					}
+				},
+				error : function(request, status) {
+					alert("오류가 발생했습니다.");
+				}
+			});
+		}
+	}
+	/* 이메일 인증번호 일치 여부 start */
 </script>
 </head>
 <body>
-<!-- 	<div class="jumbotron member-jumbo">
+	<!-- 	<div class="jumbotron member-jumbo">
 		<h1>멤버등록</h1>
 	</div> -->
 	<div class="container">
-	<div class="form-body">
-		<div class="row">
-			<div class="form-holder">
-				<div class="form-content">
-					<div class="form-items">
-						<h3>회원가입</h3>
-						<p>정보입력</p>
-						<form class="requires-validation" action="insertMember"
-							method="post">
-							<div class="col-md-12">
-								<input type="text" class="form-control" name="mb_id"
-									placeholder="아이디" required>
-								<div class="valid-feedback">Username field is valid!</div>
-								<div class="invalid-feedback">Username field cannot be
-									blank!</div>
+		<div class="form-body">
+			<div class="row">
+				<div class="form-holder">
+					<div class="form-content">
+						<div class="form-items">
+							<h3>회원가입</h3>
+							<p>정보입력</p>
+							<form class="requires-validation" action="insertMember"
+								method="post">
+								<div class="col-md-12">
+									<input type="text" class="form-control" name="mb_id"
+										placeholder="아이디" required>
+									<div class="valid-feedback">유효한아이디입니다.</div>
+									<div class="invalid-feedback">공백없이 입력해주세요</div>
 
-							</div>
-							<div class="col-md-12">
-								<input type="password" class="form-control" name="mb_pw"
-									placeholder="패스워드" required>
-								<div class="valid-feedback">Username field is valid!</div>
-								<div class="invalid-feedback">Username field cannot be
-									blank!</div>
+								</div>
+								<div class="col-md-12">
+									<input type="password" class="form-control" name="mb_pw"
+										placeholder="패스워드" required>
+									<div class="valid-feedback">사용할 수 있는 패스워드입니다.</div>
+									<div class="invalid-feedback">패스워드가 적합히 입력해주세요</div>
 
-							</div>
-							<div class="col-md-12">
-								<!-- 		<div class="input-group-prepend">
-					<span class="input-group-text">핸드폰번호</span>
-				</div>
-				<input type="text" class="form-control" name="mb_phone"
-					placeholder="핸드폰번호" required> -->
-
-								<tr class="mobileNo">
-									<th><label for="phone">휴대폰 번호</label></th>
-									<td>
-										<p>
-											<input id="phone" type="text" name="mb_phone" title="전화번호 입력"
-												value="01065742540" required />
-											 <button id="phoneChk" class="btn btn-dark doubleChk">인증번호 보내기</button><br />
-											  <input id="phone2" type="text" name="phone2" title="인증번호 입력" disabled required />
-											<button id="phoneChk2" class="btn btn-dark doubleChk">인증확인</button> <span
-												class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를
-												해주십시오.</span> <input type="hidden" id="phoneDoubleChk" />
-										</p>
-									</td>
-								</tr>
-							</div>
-							<!-- 	<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text">이메일주소</span>
-				</div>
-				<input type="email" class="form-control" name="mb_email"
-					placeholder="이메일주소" required>
-			</div> -->
-							<input id="email" class="text_box" type="text" name="mb_email"
-								placeholder="이메일 입력" required autofocus>
-							<button id="sendMail" class="btn btn-dark btn-sm">발송하기</button>
-							<div class="text_box" id="cert">
-								<input id='emailCheck' class='text_box' type='text' required
-									disabled>
-								<button id='check' class='btn btn-dark btn-sm'
-									onclick='emailCheck()'>인증확인</button>
+								</div>
+								<div class="col-md-12">
+									<tr class="mobileNo">
+										<th><label for="phone">휴대폰 번호</label></th>
+										<td>
+											<p>
+												<input id="mb_phone" type="text" name="mb_phone"
+													title="전화번호 입력" required />
+												<button type="button" id="phoneChk"
+													class="btn btn-dark doubleChk">인증번호 보내기</button>
+												<br /> <input id="phone2" type="text" name="phone2"
+													title="인증번호 입력" disabled required />
+												<button type="button" id="phoneChk2"
+													class="btn btn-dark doubleChk">인증확인</button>
+												<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호
+													보내기를 해주십시오.</span> <input type="hidden" id="phoneDoubleChk" />
+											</p>
+										</td>
+									</tr>
+								</div>
+								<div class="col-md-12">
+									<div id="menu-text">E-mail 인증</div>
+									<input id="mb_email" class="text_box" type="text"
+										name="mb_email" placeholder="이메일 입력" required autofocus>
+									<button type="button" id="sendMail"
+										class="btn btn-primary btn-sm">발송하기</button>
+									<div class="text_box" id="cert">
+										<input id='emailCheck' class='text_box' type='text' required
+											disabled>
+										<button type="button" id='check' class='btn btn-primary btn-sm'
+											onclick='qweemailCheck(); return false;' >인증확인</button>
+									</div>
+								</div>
 
 								<div class="mx-auto" id="footer">
 									<button id="conRegister" type="submit" class="btn btn-dark">회원가입</button>
 								</div>
-								</div>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	</div>
-
 </body>
 </html>
