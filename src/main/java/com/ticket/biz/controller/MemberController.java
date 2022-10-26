@@ -25,28 +25,28 @@ import com.ticket.biz.member.MemberVO;
 @Controller
 @SessionAttributes("member")
 public class MemberController {
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	// 회원 검색
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap() {
-		Map<String, String> conditionMap = new HashMap<String, String>();
+		Map<String, String> conditionMap = new HashMap<>();
 		conditionMap.put("아이디", "MB_ID");
 		conditionMap.put("이름", "MB_NAME");
 		conditionMap.put("전화번호", "MB_PHONE");
 		conditionMap.put("이메일", "MB_EMAIL");
 		return conditionMap;
 	}
-	
+
 	//멤버등록
 	@RequestMapping(value="/insertMember", method=RequestMethod.POST)
 	public String insertMember(MemberVO vo) throws IllegalStateException {
 		memberService.insertMember(vo);
 		return "redirect:index.jsp";
 	}
-	
+
 	//관리자 회원조회
 	@RequestMapping("/getMemberList")
 	public String getMemberListPost(MemberVO vo, String nowPageBtn, Model model) {
@@ -72,10 +72,8 @@ public class MemberController {
 		model.addAttribute("memberList", memberService.getMemberList(vo));
 		return "admin/getMemberList";
 	}
-	
-	
-	
-	
+
+
 	@Autowired
 	MailSender sender;
 	@Autowired

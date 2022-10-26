@@ -54,7 +54,7 @@ public class CouponController {
 		@RequestMapping("/getCoupon")
 		public String getCoupon(CouponVO vo, Model model) {
 			vo = couponService.getCoupon(vo);
-		
+
 			model.addAttribute("coupon",couponService.getCoupon(vo));
 				return "coupon/updateCouponform";
 
@@ -79,10 +79,10 @@ public class CouponController {
 		vo.setOffset(pvo.getOffset());
 
 		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		 String today = sdf.format(now);
-		 
-		model.addAttribute("today",today); 
+
+		model.addAttribute("today",today);
 		model.addAttribute("paging", pvo);
 		model.addAttribute("couponList", couponService.getCouponList(vo));
 		return "coupon/getCouponList";
