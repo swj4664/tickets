@@ -17,6 +17,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -346,32 +347,17 @@ public class PayController {
 	@Autowired
 	private PayService payService;
 	
-	// 글 목록
+	// 나의 결제 정보
 		@RequestMapping("/myPayList")
-		public String getPayListPost(PayVO vo, Model model) {
-
-//			//총 목록 수
-//			int totalPageCnt = couponService.totalCouponListCnt(vo);
-//			//현재 페이지 설정
-//			int nowPage = Integer.parseInt(nowPageBtn==null || nowPageBtn.equals("") ? "1" :nowPageBtn);
-//			System.out.println("totalPageCnt: "+totalPageCnt +", nowPage: "+nowPage);
-//			//한페이지당 보여줄 목록 수
-//			int onePageCnt = 10;
-//			//한 번에 보여질 버튼 수
-//			int oneBtnCnt = 5;
-//
-//			PagingVO pvo = new PagingVO(totalPageCnt, onePageCnt, nowPage, oneBtnCnt);
-//			vo.setOffset(pvo.getOffset());
-//
-//			Date now = new Date();
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-//			 String today = sdf.format(now);
-//			 
-//			model.addAttribute("today",today); 
-//			model.addAttribute("paging", pvo);
-			model.addAttribute("payList", payService.getPayList(vo));
-			return "views/myPay";
+		public String getPayListPost(PayVO vo, Model model, HttpSession session) {
+//			System.out.println(session.getAttribute("userId").toString());
+//			if (vo.getMb_id().equals(session.getAttribute("userId").toString())) {
+//				System.out.println(vo);
+//				vo.setMb_id(session.getAttribute("userId").toString());
+//				model.addAttribute("payList", payService.getPayList(vo));
+//				return "views/myPay";
+//			} else {
+				return "views/myPay?error=1";
+//			}
 		}
-
-
 	}

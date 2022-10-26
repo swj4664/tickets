@@ -12,7 +12,7 @@
 		SELECT * FROM PAY P, MEMBER MB
 <!-- 		, exhibition e -->
 		WHERE 1=1 AND P.MB_ID=MB.MB_ID
-<!-- 		AND P.MB_ID = #{mb_id} -->
+		AND P.MB_ID = #{userId}
 <!-- 		AND p.EXH_NO=e.EXH_NO; -->
 
 

@@ -12,11 +12,11 @@
 <c:forEach items="${payList}" var="payList">
 	<tr>
 	  <td class="text-center"> ${payList.p_mer}</td>
-<%-- 	  <td class="text-center"> ${payList.p_date}</td> --%>
+	  <td class="text-center"> ${payList.p_date}</td>
 <%-- 	  <td class="text-center"> ${payList.exh_no}</td> --%>
 <%-- 	  <td class="text-center"> ${payList.exh_title}</td> --%>
-<%-- 	  <td class="text-center"> ${payList.buyer}</td> --%>
-<%-- 	  <td class="text-center"> ${payList.buyer.tel}</td> --%>
+	  <td class="text-center"> ${payList.buyer}</td>
+	  <td class="text-center"> ${payList.buyer.tel}</td>
 	</tr>
 </c:forEach>
 </table>
