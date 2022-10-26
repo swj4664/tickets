@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 public interface MemberService {
 	/*멤버생성*/
 	void insertMember(MemberVO vo);
+	
 	public MemberVO loginCheck(MemberVO vo);
 	public void logout(HttpSession session);
 
