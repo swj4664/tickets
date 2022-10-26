@@ -11,28 +11,33 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.ticket.biz.member.MemberService;
 import com.ticket.biz.member.MemberVO;
 
-
-
 @Controller
 @SessionAttributes("login")
 public class LoginController {
 	@Autowired
 	private MemberService memberService;
-	
-	@RequestMapping(value="/logincheck", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/logincheck", method = RequestMethod.POST)
 	public String login(MemberVO vo, HttpSession session) {
 		System.out.println("로그인 인증 처리...");
-		if(vo.getMb_id() == null || vo.getMb_id().equals("")) {
-			 throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다."); 
+		if (vo.getMb_id() == null || vo.getMb_id().equals("")) {
+			throw new IllegalArgumentException("아이디는 반드시 입력해야 합니다.");
 		}
-			
-		if(memberService.loginCheck(vo) != null) {
+
+		if (memberService.loginCheck(vo) != null) {
 			session.setAttribute("userId", memberService.loginCheck(vo).getMb_id());
 //			session.setAttribute("userName", memberService.loginCheck(vo).getMb_name());
-			System.out.println("아이디: "+memberService.loginCheck(vo).getMb_id());
+			System.out.println("아이디: " + memberService.loginCheck(vo).getMb_id());
 			return "redirect:index.jsp";
-		}else { 
-			return "login.jsp?error=1" ;
+		} else {
+			return "login.jsp?error=1";
 		}
 	}
+
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:login.jsp";
+	}
+
 }

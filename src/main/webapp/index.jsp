@@ -10,7 +10,6 @@
 <!-- header end -->
 </head>
 <body>
-드랍다운눌러서 회원등록누르면 인덱스405떠서 오류떠요 아직수정중이예여
 <br>
 <br>
 <a href="/getMemberList">회원목록</a>
@@ -18,6 +17,7 @@
 <!-- <a href="/getMemberList">관리자 결제목록</a> -->
 <a href="/getCouponList"> 쿠폰목록</a>
 <a href="/pay">관리자 결제목록</a>
+<!-- <a href="/login_kakao">카카오로그인</a> -->
 <a href="/payUser">회원 결제</a>
 <a href="./myPayList">회원 결제 목록</a>
 <a href="login.jsp">로그인</a>
@@ -30,7 +30,7 @@
    <form action="/insertCoupon" method="post"> 
       <fieldset>
             <legend>쿠폰등록</legend>      
-                  <div class="row">
+                  <div class="row">2336
                   <label for="c_name">쿠폰명</label>   
                <input class="form-control" type="text" name="c_name" id="c_name" required="required" autocomplete="off">                     
                <div class="col">
@@ -45,7 +45,6 @@
                   <button class="btn btn-primary btn-lg" type="submit" >등록</button>
                </div>
                </div>
-            
          </fieldset>
    </form>
    </div>

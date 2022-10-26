@@ -1,11 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="header.jsp"%>
+<%@ include file="../../header.jsp"%>
+<style>
+.login-kakao{
+border:0;
+background-color:transparent;
+}
+
+</style>
+	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+Kakao.init('1ea44200cb8cf7bb0a768d9c219c84a0'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+             console.log(response);
+          },
+          fail: function (error) {
+            console.log(error);
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error);
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+           console.log(response);
+        },
+        fail: function (error) {
+          console.log(error);
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined);
+    }
+  }   
+  
+  
+  
+  
+  
+  
+  
+  
+</script>
 </head>
 <body>
 <div class="jumbotron">
@@ -35,5 +91,24 @@
 			</form>
 		</div>
 	</div>
+<!-- 	<button class="login-kakao"onclick="kakaoLogin()">
+	<img src="images/kakao_login_medium_narrow.png" style="height:60px"/>
+	</button> -->
+	
+ <c:choose>
+ 	<c:when test='${userId ne NULL}' >
+ 		<ul class="navbar-nav nav-right">    
+		    <li class="nav-item"><a class="nav-link">${userId}님</a></li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="logout">로그아웃</a>
+		    </li>
+		  </ul>
+ 	</c:when>
+ 	<c:otherwise>
+ 		<a href="login_kakao"><img src="images/kakao_login_medium_narrow.png" style="height:60px"/></a>
+ 	</c:otherwise>
+ </c:choose>
+ 
+	  <a href="/oauth/authorization/naver">네이버 로그인</a>
 </body>
 </html>
