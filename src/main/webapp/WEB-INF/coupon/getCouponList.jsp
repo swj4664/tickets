@@ -8,6 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>쿠폰 목록</title>
+ <script>
+  
+     function notlogin() {
+        alert("로그인 후 진행 해 주시기 바랍니다.");
+        location.href ="/login.jsp"
+     };
+    </script>
+
 <%@ include file="/header.jsp"%>
 </head>
 <body>
@@ -29,9 +37,27 @@
 	  <td class="text-center">할인율 : ${coupon.c_per}%</td>	
 	  <td class="text-center">만료날짜 : ${coupon.c_date}</td>
 	    <td class="text-center text-danger"> ${endDate_N-startDate_N}일 남음 </td>
-	  <td class="text-center"><button class="btn btn-primary" onclick="location.href='/getCoupon?c_num=${coupon.c_num}'">수정</button></td>
-	  <td class="text-center"><button class="btn btn-danger" onclick="location.href='/deleteCoupon?c_num=${coupon.c_num}'">삭제 </button></td>
-	</tr>
+
+
+
+					<c:choose>
+						<c:when test="${userId eq 'admin'}">
+							<td class="text-center"><button class="btn btn-primary"
+									onclick="location.href='/getCoupon?c_num=${coupon.c_num}'">수정</button></td>
+							<td class="text-center"><button class="btn btn-danger"
+									onclick="location.href='/deleteCoupon?c_num=${coupon.c_num}'">삭제 </button></td>
+						</c:when>
+						<c:when test="${userId ne null}">
+							<td class="text-center"><button class="btn btn-primary" onclick="location.href='/insertCouponBox?c_num=${coupon.c_num}'">쿠폰받기</button></td>
+						</c:when>
+						<c:otherwise>
+							<td class="text-center"><button class="btn btn-primary"
+									onclick="notlogin()">쿠폰받기</button></td>
+						</c:otherwise>
+					</c:choose>
+
+
+				</tr>
 </c:forEach>
 </table>
 </div>

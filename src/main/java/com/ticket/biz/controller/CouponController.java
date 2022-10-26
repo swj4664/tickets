@@ -24,6 +24,8 @@ public class CouponController {
 
 	@Autowired
 	private CouponService couponService;
+	
+	
 	//쿠폰 등록
 	@PostMapping(value = "/insertCoupon")
 	public String insertCoupon(CouponVO vo) throws IllegalStateException, IOException {
@@ -81,7 +83,8 @@ public class CouponController {
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
 		 String today = sdf.format(now);
-		 
+		
+		
 		model.addAttribute("today",today); 
 		model.addAttribute("paging", pvo);
 		model.addAttribute("couponList", couponService.getCouponList(vo));

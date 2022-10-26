@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CouponBoxDAO">
+	<!-- 쿠폰받기 -->
+<insert id="insertCouponBox">
+	INSERT INTO C_BOX (
+	C_NUM,
+	MB_ID
+	)
+	SELECT #{c_num},#{mb_id}
+	from dual
+	WHERE NOT EXISTS ( SELECT * FROM C_BOX WHERE C_NUM = #{c_num} AND MB_ID=#{mb_id})
+</insert>
+
+<!-- 	쿠폰사용 -->
+   <update id="updateCouponBox">
+      UPDATE C_BOX
+      SET CB_CHECK=1
+      WHERE CB_ID=#{cb_id}
+  </update>
+
+<select id="getCouponBox" resultType="couponbox">
+SELECT * 
+from C_BOX
+WHERE C_NUM= #{c_num}
+AND MB_ID=#{mb_id};
+</select>
+
+
+
+</mapper>

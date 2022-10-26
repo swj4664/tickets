@@ -32,6 +32,9 @@
   <li class="nav-item">
     <a class="nav-link disabled">Disabled</a>
   </li>
+    <li class="nav-item">
+    ${userId}님
+  </li>
 </ul>
 </body>
 </html>
