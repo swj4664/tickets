@@ -41,6 +41,6 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "login.jsp";
+		return "redirect:index.jsp";
 	}
 }

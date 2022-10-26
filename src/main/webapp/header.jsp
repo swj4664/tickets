@@ -35,6 +35,9 @@
     <li class="nav-item">
     ${userId}님
   </li>
+      <li class="nav-item">
+   <a href="/logout">로그아웃</a> 
+  </li>
 </ul>
 </body>
 </html>
