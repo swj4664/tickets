@@ -7,7 +7,7 @@
 		INSERT INTO MEMBER(MB_ID, MB_PW, MB_PHONE, MB_EMAIL) VALUES( #{mb_id}, #{mb_pw}, #{mb_phone}, #{mb_email})
 	</insert>
 		<!-- 로그인 -->
-	<select id="loginCheck" resultType="member">
+	<select id="login" resultType="member">
 	SELECT * FROM MEMBER WHERE MB_ID = #{mb_id} AND MB_PW = #{mb_pw}
 	</select>
 	<!-- 멤버조회 -->
