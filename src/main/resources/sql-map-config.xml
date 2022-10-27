@@ -8,11 +8,13 @@
 		<typeAlias type="com.ticket.biz.coupon.CouponVO" alias="coupon"></typeAlias>
 		<typeAlias type="com.ticket.biz.member.MemberVO" alias="member"></typeAlias>
 		<typeAlias type="com.ticket.biz.pay.PayVO" alias="pay"></typeAlias>
+		<typeAlias type="com.ticket.biz.board.BoardVO" alias="board"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappings/coupon-mappings.xml" />
 		<mapper resource="mappings/member-mappings.xml" />
 		<mapper resource="mappings/pay-mappings.xml" />
+		<mapper resource="mappings/board-mappings.xml"/>
 	</mappers>
 </configuration>
