@@ -7,7 +7,8 @@
 	INSERT INTO C_BOX (
 	C_NUM,
 	MB_ID
-	)VALUES(#{c_num},#{mb_id})
+	)
+	VALUES(#{c_num}, #{mb_id})
 </insert>
 
 <!-- 	쿠폰사용 -->

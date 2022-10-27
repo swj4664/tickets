@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- jQuery CDN --->
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
 var chk = false;
@@ -147,21 +146,19 @@ $(document).ready(function(){
 <div style="position:sticky;top:0;left:0;background-color:#fff;padding-bottom:20px;border-bottom:1px solid #000;">
 	<h2>아임 서포트 결제 모듈 테스트 해보기</h2><br>
 	<h2>결제하기</h2>
-	이름: <input type="text" name="buyer" id="buyer" placeholder="이름 입력"><br>
-	전화번호: <input type="text" name="buyer_tel" id="buyer_tel" placeholder="예시: 010-1111-2222"><br>
-	이메일: <input type="text" name="buyer_email" id="buyer_email" placeholder="이메일 입력"><br>
-<!-- 	주소: <input type="text" name="uaddr" id="uaddr" placeholder="주소 입력"><br> -->
-	금액: <input type="number" name="amount" id="amount" ><br>
-	결제고유ID<input type="text" name="p_id" id="p_id" >
-	상점거래ID<input type="text" name="p_mer" id="p_mer" >
-<!-- 	회원아이디<input type="text" name="mb_id" id="mb_id" > -->
-	결제일시<input type="text" name="p_date" id="p_date">
-	상품명<input type="text" name="exh_title" id="exh_title" >
+	이름 : <input type="text" name="buyer" id="buyer" placeholder="이름 입력"><br>
+	전화번호 : <input type="text" name="buyer_tel" id="buyer_tel" placeholder="예시: 010-1111-2222"><br>
+	이메일 : <input type="text" name="buyer_email" id="buyer_email" placeholder="이메일 입력"><br>
+	금액 : <input type="number" name="amount" id="amount" ><br>
+	쿠폰 선택 :
+	결제고유ID : <input type="text" name="p_id" id="p_id" >
+	상점거래ID : <input type="text" name="p_mer" id="p_mer" >
+	결제일시 : <input type="text" name="p_date" id="p_date">
+	상품명 : <input type="text" name="exh_title" id="exh_title" >
 	<button id="check_module" type="button">결제하기</button>
 	<br><hr>
 
 			<h2>결제내역 관련</h2>
-			<!-- 	imp_uid: <input type="text" name="imp_uid" id="imp_uid" placeholder="imp_uid 입력"><br> -->
 			merchant_uid: <input type="text" name="merchant_uid" id="merchant_uid" placeholder="merchant_uid 입력"><br>
 			<button id="cancel_module" type="button">취소하기</button>
 			<button id="list_module" type="button">결제완료목록조회</button>

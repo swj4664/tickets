@@ -145,17 +145,6 @@ public class PayController {
       } 
    }
    
-//   // 나의 결제내역 취소시키기
-//	@RequestMapping("/mypaycan")
-//	public String deletemypay(PayVO vo, HttpSession session) {
-//		vo = payService.getPay(vo);
-//		payService.deletePay(vo);
-//			return "redirect:myPay";
-//
-//	}
-   
-   
-   
    //상품결제 폼 호출 (관리자 결제목록)
    @RequestMapping(value={"/pay"}, method=RequestMethod.GET)
    public String pay(HttpServletRequest request, Model model) {
