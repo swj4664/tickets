@@ -24,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void logout(HttpSession session) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.insertMember(vo);
 	}
 
-	// 회원목록 
+	// 회원목록
 	@Override
 	public List<MemberVO> getMemberList(MemberVO vo) {
 		return memberDAO.getMemberList(vo);
@@ -42,5 +42,5 @@ public class MemberServiceImpl implements MemberService {
 	public int totalMemberListCnt(MemberVO vo) {
 		return memberDAO.totalMemberListCnt(vo);
 	}
-	
+
 }

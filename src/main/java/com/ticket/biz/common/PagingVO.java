@@ -1,16 +1,16 @@
 package com.ticket.biz.common;
 
 public class PagingVO {
-	
+
 	//총 목록수, 한페이지에 보여질 목록 수, 현재페이지 버튼
 	private int totalPageCnt, onePageCnt, nowPageBtn;
-	
+
 	//총 버튼 수, 건너뛸 페이지 수
 	private int totalBtnCnt, offset;
-	
+
 	//한 번에 보여질 버튼 수, 시작버튼, 종료버튼
 	private int oneBtnCnt, startBtn, endBtn;
-	
+
 
 	public PagingVO(int totalPageCnt, int onePageCnt, int nowPageBtn, int oneBtnCnt) { // 214, 10, 1
 		this.totalPageCnt = totalPageCnt;
@@ -30,7 +30,7 @@ public class PagingVO {
 			this.totalBtnCnt = totalPageCnt / onePageCnt +1;
 		}
 	}
-	
+
 	//건너띌 개수 구하기
 	public void setOffset() {
 		this.offset = (nowPageBtn -1 ) * onePageCnt;
@@ -47,12 +47,12 @@ public class PagingVO {
 		//종료버튼이 총 버튼 수와 같거나 작아야한다.
 		if(endBtn > totalBtnCnt) endBtn = totalBtnCnt;
 	}
-	
+
 	public int getOnePageCnt() {
 		return onePageCnt;
 	}
 
-	public int getTotalBtnCnt() {                  
+	public int getTotalBtnCnt() {
 		return totalBtnCnt;
 	}
 
@@ -64,8 +64,8 @@ public class PagingVO {
 		return offset;
 	}
 
-	
-	
+
+
 	public int getOneBtnCnt() {
 		return oneBtnCnt;
 	}
@@ -81,5 +81,5 @@ public class PagingVO {
 	public int getEndBtn() {
 		return endBtn;
 	}
-	
+
 }

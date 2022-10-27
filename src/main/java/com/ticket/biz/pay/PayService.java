@@ -13,6 +13,6 @@ public interface PayService {
 		List<PayVO> getPayList(PayVO vo);
 
 		int totalPayListCnt (PayVO vo);
-		
+
 		PayVO getPay(PayVO vo);
 }

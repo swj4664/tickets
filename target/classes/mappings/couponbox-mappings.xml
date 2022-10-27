@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CouponBoxDAO">
+	<!-- 쿠폰받기 -->
+<insert id="insertCouponBox">
+	INSERT INTO C_BOX (
+	C_NUM,
+	MB_ID
+	)VALUES(#{c_num},#{mb_id})
+</insert>
+
+<!-- 	쿠폰사용 -->
+   <update id="updateCouponBox">
+      UPDATE C_BOX
+      SET CB_CHECK=1
+      WHERE CB_ID=#{cb_id}
+  </update>
+
+<select id="getCouponBox" resultType="_integer">
+SELECT count(*) 
+from C_BOX
+WHERE C_NUM= #{c_num}
+AND MB_ID=#{mb_id};
+</select>
+
+ <select id="myCouponList" resultType="coupon">
+      SELECT * FROM C_BOX cb,COUPON c
+		 WHERE 1=1
+		 AND CB.C_NUM= C.C_NUM 
+		 AND CB.MB_ID=#{mb_id}
+      ORDER BY 
+      c.C_NUM DESC
+      LIMIT 10 OFFSET #{offset}
+   </select>
+ <select id="myCouponListCnt" resultType="_int">
+      SELECT COUNT(*) FROM C_BOX cb,COUPON c
+		 WHERE 1=1
+		 AND CB.C_NUM= C.C_NUM 
+		 AND CB.MB_ID=#{mb_id}
+      ORDER BY 
+      c.C_NUM DESC
+      LIMIT 10 OFFSET #{offset}
+   </select>
+</mapper>

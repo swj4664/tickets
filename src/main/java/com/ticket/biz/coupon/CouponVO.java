@@ -6,6 +6,7 @@ public class CouponVO {
 	private int c_per;
 	private String c_date;
 
+	private String mb_id;
 	private int offset;
 
 	public int getC_num() {
@@ -46,6 +47,14 @@ public class CouponVO {
 
 	public void setC_date(String c_date) {
 		this.c_date = c_date;
+	}
+
+	public String getMb_id() {
+		return mb_id;
+	}
+
+	public void setMb_id(String mb_id) {
+		this.mb_id = mb_id;
 	}
 
 
