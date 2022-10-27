@@ -24,6 +24,8 @@ public class CouponController {
 
 	@Autowired
 	private CouponService couponService;
+	
+	
 	//쿠폰 등록
 	@PostMapping(value = "/insertCoupon")
 	public String insertCoupon(CouponVO vo) throws IllegalStateException, IOException {
@@ -61,10 +63,10 @@ public class CouponController {
 		}
 
 
-	// 글 목록
+	// 쿠폰목록
 	@RequestMapping("/getCouponList")
-	public String getCouponListPost(CouponVO vo, String nowPageBtn, Model model) {
-
+	public String getCouponListPost(CouponVO vo, String nowPageBtn, Model model ,HttpSession session) {
+		vo.setMb_id((String)session.getAttribute("userId")); 
 		//총 목록 수
 		int totalPageCnt = couponService.totalCouponListCnt(vo);
 		//현재 페이지 설정
@@ -81,7 +83,8 @@ public class CouponController {
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
 		 String today = sdf.format(now);
-		 
+		
+		
 		model.addAttribute("today",today); 
 		model.addAttribute("paging", pvo);
 		model.addAttribute("couponList", couponService.getCouponList(vo));

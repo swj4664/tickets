@@ -20,6 +20,11 @@ public class MemberDAO {
 		mybatis.insert("MemberDAO.insertMember", vo);
 	}
 
+	public MemberVO loginCheck(MemberVO vo) {
+		return mybatis.selectOne("MemberDAO.login", vo);
+	}
+
+
 	// 회원목록 조회
 	public List<MemberVO> getMemberList(MemberVO vo) {
 		return mybatis.selectList("MemberDAO.getMemberList", vo);
@@ -29,4 +34,6 @@ public class MemberDAO {
 	public int totalMemberListCnt(MemberVO vo) {
 		return mybatis.selectOne("MemberDAO.totalMemberListCnt", vo);
 	}
+
+
 }

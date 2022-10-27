@@ -8,6 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>쿠폰 목록</title>
+ <script>
+  
+     function notlogin() {
+        alert("로그인 후 진행 해 주시기 바랍니다.");
+        location.href ="/login.jsp"
+     };
+    </script>
+
 <%@ include file="/header.jsp"%>
 </head>
 <body>
@@ -29,9 +37,32 @@
 	  <td class="text-center">할인율 : ${coupon.c_per}%</td>	
 	  <td class="text-center">만료날짜 : ${coupon.c_date}</td>
 	    <td class="text-center text-danger"> ${endDate_N-startDate_N}일 남음 </td>
-	  <td class="text-center"><button class="btn btn-primary" onclick="location.href='/getCoupon?c_num=${coupon.c_num}'">수정</button></td>
-	  <td class="text-center"><button class="btn btn-danger" onclick="location.href='/deleteCoupon?c_num=${coupon.c_num}'">삭제 </button></td>
-	</tr>
+
+
+
+					<c:choose>
+						<c:when test="${userId eq 'admin'}">
+							<td class="text-center"><button class="btn btn-primary"
+									onclick="location.href='/getCoupon?c_num=${coupon.c_num}'">수정</button></td>
+							<td class="text-center"><button class="btn btn-danger"
+									onclick="location.href='/deleteCoupon?c_num=${coupon.c_num}'">삭제 </button></td>
+						</c:when>
+						<c:when test="${userId ne null}">
+							<c:choose>
+								<c:when test="${error!=1}">
+									<td class="text-center"><button class="btn btn-primary" onclick="location.href='/insertCouponBox?c_num=${coupon.c_num}'">쿠폰받기</button></td>
+								</c:when>
+							</c:choose>
+						
+						</c:when>
+						<c:otherwise>
+							<td class="text-center"><button class="btn btn-primary"
+									onclick="notlogin()">쿠폰받기</button></td>
+						</c:otherwise>
+					</c:choose>
+
+
+				</tr>
 </c:forEach>
 </table>
 </div>
@@ -40,9 +71,10 @@
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
 <!-- 		맨처음 -->
+					<c:if test="${paging.nowPageBtn > 1 }">
 						<li class="page-item "><a class="page-link"
 							href="getCouponList?nowPageBtn=1">&laquo;</a></li>
-							
+							</c:if>
 							<c:if test="${paging.nowPageBtn > 1 }">
 							<li class="page-item "><a class="page-link"
 							href="getCouponList?nowPageBtn=${paging.nowPageBtn-1}">&lt;</a></li>
@@ -66,10 +98,10 @@
 							<li class="page-item "><a class="page-link"
 							href="getCouponList?nowPageBtn=${paging.nowPageBtn+1}">&gt;</a></li>
 							</c:if>
-<!-- 		맨끝 -->
+<!-- 		맨끝 -->			<c:if test="${paging.nowPageBtn < paging.totalBtnCnt }">
 								<li class="page-item"><a class="page-link"
 							href="getCouponList?nowPageBtn=${paging.totalBtnCnt}">&raquo;</a></li>
-								
+							</c:if>	
 					</ul>
 				</nav>
 			

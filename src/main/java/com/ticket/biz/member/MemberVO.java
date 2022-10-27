@@ -10,13 +10,13 @@ public class MemberVO {
 	private String mb_birth;
 	private String mb_email;
 	private int mb_check;
-	
+
 	private String searchCondition;
 	private String searchKeyword;
-	
+
 	private int offset;
-	
-	
+
+
 
 	public String getSearchCondition() {
 		return searchCondition;
