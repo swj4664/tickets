@@ -25,19 +25,18 @@
 	</select>
 	
 <insert id="insertBoard">
-  INSERT INTO NOTICE (NOTI_NO,NOTI_TITLE,NOTI_WRITER,NOTI_CONTENT,
-  NOTI_DATE,NOTI_CATEGORY,NOTI_MODIFY_NOTI_SECRET) 
-  VALUES (#{noti_no} ,#{noti_title},#{noti_writer},
-             #{noti_content},#{noti_date},
-  			#{noti_category},#{noti_modify},#{noti_secret})
+  INSERT INTO NOTICE (NOTI_TITLE, NOTI_WRITER, NOTI_CONTENT,
+  NOTI_DATE, NOTI_CATEGORY, NOTI_MODIFY, NOTI_SECRET) 
+  VALUES ( #{noti_title}, #{noti_writer},
+             #{noti_content}, now(),
+  			#{noti_category}, now(), #{noti_secret})
 </insert>
 
 <update id="updateBoard">
 	UPDATE NOTICE 
-	SET NOTI_NO=#{noti_no}, NOTI_TITLE=#{noti_title},
+	SET NOTI_TITLE=#{noti_title},
 	NOTI_WRITER =#{noti_writer}, NOTI_CONTENT=#{noti_content}, 
-	NOTI_DATE=#{noti_date}, NOTI_CATEGORY=#{noti_category} ,
-	NOTI_MODIFY =#{noti_modify}
+	NOTI_MODIFY =now()
 
 </update>
 

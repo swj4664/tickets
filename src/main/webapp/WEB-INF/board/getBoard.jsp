@@ -71,19 +71,19 @@
       <div class="input-group-prepend">
         <span class="input-group-text">등록일</span>
       </div>
-      <input type="text" class="form-control innm" name="regDate" value="${board.regdate}" readonly <%=sts %>>      
+<%--       <input type="text" class="form-control innm" name="regDate" value="${board.regdate}" readonly <%=sts %>>       --%>
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">조회수</span>
       </div>
-      <input type="text" class="form-control innm" name="cnt" value="${board.cnt}" readonly <%=sts %>>      
+<%--       <input type="text" class="form-control innm" name="cnt" value="${board.cnt}" readonly <%=sts %>>       --%>
     </div>
     <div id="footer">
-	  	<button type="submit" class="btn btn-primary" <%=sts %>>글수정</button>
-	  	<button id="conWrite" type="button" class="btn btn-primary" <%=sts %>>글쓰기</button>
-	  	<button id="conDel" type="button" class="btn btn-primary" <%=sts %>>글삭제</button>
-	  	<button id="conList" type="button" class="btn btn-primary">글목록</button>
+	  	<a href="updateBoard"<%=sts %>>글수정</a>
+	  	<a href="write.jsp" <%=sts %>>글쓰기</a>
+	  	<a href="deleteBoard"<%=sts %>>글삭제</a>
+	  	<a href="getBoardList">글목록</a>
 	</div>
   </form>  
 </div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- <%@ include file="../../header.jsp" %> --%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 #searchNav{-webkit-justify-content: flex-end; justify-content: flex-end; }
 a {text-decoration:none;font-weight:bolder; display: inline-block; padding: 5px 10px; background-color: blue; color: #fff; border: 1px solid #777; border-radius: 5px; }
@@ -8,6 +9,14 @@ a:hover , a:active {background-color: red; }
 a.aSel {color: red;}
 div#btnBox{text-align:center;}
 </style>
+<script>
+
+
+function getboard(val){
+	location.href="getBoard?noti_no="+val;
+
+}
+</script>
 <body>
 <div class="jumbotron">
    <h1>공지 사항</h1>      
@@ -42,7 +51,9 @@ div#btnBox{text-align:center;}
 <c:forEach items="${boardList}" var="board">
 	<c:if test="${board.noti_secret eq 'true'}">
 	<c:choose>
-	<c:when test="${board.noti_writer eq session.getAtrribute('mb_id') or session.getAttribute('mb_id') eq 'admin'}">
+	<c:when test="${board.noti_writer eq session.getAtrribute('userId') or session.getAttribute('userId') eq 'admin'}">
+		<td >${board.noti_no }</td>
+	
 	  <td>${board.noti_title}</td>
 	  </c:when>
 	  <c:otherwise>
@@ -55,7 +66,7 @@ div#btnBox{text-align:center;}
 	  <c:if test="${board.noti_secret eq 'false'}">
 	
 	 <td>${board.noti_title}</td>
-	  <tr onclick="selTr(${board.noti_no})" style="cursor:pointer;">
+	  <tr onclick="getboard(${board.noti_no})" style="cursor:pointer;">
 	  <td class="tdCenter">${board.noti_no}</td>
 	  <td class="tdCenter">${board.noti_writer}</td>
 

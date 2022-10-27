@@ -24,6 +24,6 @@
 <a href="insertMember.jsp">회원가입</a><br>
 <a href="insertCoupon.jsp">쿠폰등록</a><br>
 <a href="/MyCoupon">내 쿠폰함</a><br>
-
+<a href="/getBoardList">게시판 가기</a>
 </body>
 </html>

@@ -15,11 +15,11 @@
 <label>비밀글 설정</label>
 
 
-<select>
+<select name="noti_category">
 <option value="회원">회원</option>
 <option value="결제">결제</option>
 </select>
-<input type="text" name="noti_wirter" placeholder="작성자 아이디값 받아오기" value="<%= session.getAttribute("mb_id") %>" readonly>
+<input type="text" name="noti_writer" placeholder="작성자 아이디값 받아오기" value="<%= session.getAttribute("userId") %>" readonly>
  
 <input type="text" placeholder="제목을 입력하세요" name="noti_title" >
 

@@ -46,7 +46,7 @@ public class BoardController {
 //		if(vo.isNoti_secret()==true & vo.getNoti_writer()== session.getAttribute("mb_id"))
 
 		boardService.insertBoard(vo);	
-		return "boardList";
+		return "redirect:getBoardList";
 		
 	}
 
@@ -70,9 +70,11 @@ public class BoardController {
 	// 글 수정
 	@RequestMapping("/updateBoard")
 	public String updateBoard(@ModelAttribute("board") BoardVO vo, HttpSession session) {
-		if( vo.getNoti_writer().equals(session.getAttribute("mb_id").toString()) ){
+		System.out.println("글 수정 기능 전");
+		if( vo.getNoti_writer().equals(session.getAttribute("userId").toString()) ){
+			
 			boardService.updateBoard(vo);
-			return "getBoardList.do";
+			return "redirect:getBoardList";
 		}else {
 			return "getBoard?error=1";
 		}
@@ -100,8 +102,10 @@ public class BoardController {
 	// 글 상세 조회
 	@RequestMapping("/getBoard")
 	public String getBoard(BoardVO vo, Model model) {
+		System.out.println("글상세조회");
 		model.addAttribute("board", boardService.getBoard(vo));
-		return "WEB-INF/board/getBoard.jsp";
+		System.out.println("글상세조회 수행");
+		return "board/getBoard";
 	}
 
 	// 글 목록
@@ -129,8 +133,7 @@ public class BoardController {
 		model.addAttribute("paging", pvo);
 		System.out.println("modelAttribute getboardList");
 		model.addAttribute("boardList", boardService.getBoardList(vo));
-		
-//		List<BoardVO> boardlist =boardService.getBoardList(vo);
+		List<BoardVO> boardlist =boardService.getBoardList(vo);
 		System.out.println("modelAttribute getBoardList 기능 실행 후 ");
 		return "board/boardList";
 	}
