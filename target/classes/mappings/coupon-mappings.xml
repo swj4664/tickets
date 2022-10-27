@@ -24,9 +24,11 @@
    </select>
    
    <select id="getCouponList" resultType="coupon">
-      SELECT * FROM COUPON WHERE 1=1 and
-      DATE(C_DATE) >= DATE(NOW())
-      ORDER BY C_NUM DESC
+      SELECT * FROM COUPON WHERE 1=1 
+      <if test="mb_id != 'admin' ">and DATE(C_DATE) >= DATE(NOW())</if>
+      ORDER BY 
+      <if test="mb_id == 'admin' ">C_DATE, </if>
+      C_NUM DESC
       LIMIT 10 OFFSET #{offset}
    </select>
    

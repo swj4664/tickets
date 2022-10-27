@@ -1,5 +1,7 @@
 package com.ticket.biz.couponbox;
 
+import com.ticket.biz.coupon.CouponVO;
+
 public class CouponBoxVO {
 	private int cb_id;
 	private String c_num;
@@ -11,8 +13,16 @@ public class CouponBoxVO {
 	
 	private int offset;
 	
+	private CouponVO couponvo;
 	
 	
+	
+	public CouponVO getCouponvo() {
+		return couponvo;
+	}
+	public void setCouponvo(CouponVO couponvo) {
+		this.couponvo = couponvo;
+	}
 	public String getSearchCondition() {
 		return searchCondition;
 	}

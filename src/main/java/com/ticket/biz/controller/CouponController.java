@@ -63,10 +63,10 @@ public class CouponController {
 		}
 
 
-	// 글 목록
+	// 쿠폰목록
 	@RequestMapping("/getCouponList")
-	public String getCouponListPost(CouponVO vo, String nowPageBtn, Model model) {
-
+	public String getCouponListPost(CouponVO vo, String nowPageBtn, Model model ,HttpSession session) {
+		vo.setMb_id((String)session.getAttribute("userId")); 
 		//총 목록 수
 		int totalPageCnt = couponService.totalCouponListCnt(vo);
 		//현재 페이지 설정

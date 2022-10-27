@@ -1,8 +1,11 @@
 package com.ticket.biz.couponbox.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ticket.biz.coupon.CouponVO;
 import com.ticket.biz.couponbox.CouponBoxService;
 import com.ticket.biz.couponbox.CouponBoxVO;
 
@@ -27,8 +30,26 @@ public class CouponBoxServiceImpl implements CouponBoxService {
 
 	//쿠폰체크
 	@Override
-	public CouponBoxVO getCouponBox(CouponBoxVO vo) {
-		return couponDAO.getCouponBox(vo);
+	public boolean getCouponBox(CouponBoxVO vo) {
+		boolean check= false;
+		int a=couponDAO.getCouponBox(vo);
+		if(a!=0) {
+			 check=true;
+			return check;
+		 }else {
+			 return check;
+		 }
+	}
+	
+	//내쿠폰목록
+	@Override
+	public List<CouponBoxVO> myCouponList(CouponBoxVO vo) {
+		return couponDAO.myCouponList(vo);
 	}
 
+
+	@Override
+	public int myCouponListCnt(CouponBoxVO vo) {
+		return couponDAO.myCouponListCnt(vo);
+	}
 }
