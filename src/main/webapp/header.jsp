@@ -20,7 +20,7 @@
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
     <div class="dropdown-menu">
       <a class="dropdown-item" href="/insertMember">회원등록</a>
-      <a class="dropdown-item" href="/">Another action</a>
+      <a class="dropdown-item" href="/getExhibitionList">전시</a>
       <a class="dropdown-item" href="/">Something else here</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="/">Separated link</a>
