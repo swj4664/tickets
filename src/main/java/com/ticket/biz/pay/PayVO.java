@@ -9,8 +9,8 @@ public class PayVO {
 	private String buyer;
 	private String buyer_email;
 	private String buyer_tel;
-	
-	
+
+
 	public String getP_id() {
 		return p_id;
 	}
@@ -59,6 +59,6 @@ public class PayVO {
 	public void setBuyer_tel(String buyer_tel) {
 		this.buyer_tel = buyer_tel;
 	}
-	
-	
+
+
 }
