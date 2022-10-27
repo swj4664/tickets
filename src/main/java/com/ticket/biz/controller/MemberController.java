@@ -40,11 +40,46 @@ public class MemberController {
 		return conditionMap;
 	}
 
-	//멤버등록
+	//회원가입
 	@RequestMapping(value="/insertMember", method=RequestMethod.POST)
 	public String insertMember(MemberVO vo) throws IllegalStateException {
 		memberService.insertMember(vo);
 		return "redirect:index.jsp";
+	}
+	// 회원 마이페이지
+	@RequestMapping(value="/mypage")
+	public String getMyPage(MemberVO vo, Model model) {
+		System.out.println("회원정보가져오기");
+		model.addAttribute("member", memberService.getMember(vo));
+		System.out.println("1111111"+memberService.getMember(vo));
+		return "member/mypage";
+	}
+	
+//	//회원삭제작업중
+	@RequestMapping(value="/deleteMember", method = RequestMethod.POST)
+	public String deleteMember(MemberVO vo) throws IllegalStateException {
+		
+		System.out.println("딜리트 컨트롤러입니다.");
+		memberService.deleteMember(vo);
+		return "redirect:login.jsp";
+	}
+	
+	// 회원 수정
+	@RequestMapping("/updateMember")
+	public String updateBoard(@ModelAttribute("member") MemberVO vo, HttpSession session) {
+		System.out.println("회원정보수정 if문입니다.111");
+		System.out.println(vo.getMb_id());
+		System.out.println(session.getAttribute("mb_Id").toString());
+		
+		if (vo.getMb_id().equals(session.getAttribute("mb_Id").toString())) {
+			System.out.println("회원정보수정 if문입니다.222");
+			memberService.updateMember(vo);
+			
+			return "member/mypage";
+		} else {
+			return "redirect:member/mypage?error=1";
+		}
+
 	}
 
 	//관리자 회원조회

@@ -6,8 +6,14 @@ import javax.servlet.http.HttpSession;
 
 
 public interface MemberService {
-	/*멤버생성*/
+	/*회원가입*/
 	void insertMember(MemberVO vo);
+	/*회원수정*/
+	void updateMember(MemberVO vo);
+	MemberVO getMember(MemberVO vo);
+
+	/*회원탈퇴*/
+	int deleteMember(MemberVO vo);
 	public MemberVO loginCheck(MemberVO vo);
 	public void logout(HttpSession session);
 

@@ -32,6 +32,12 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.insertMember(vo);
 	}
 
+	@Override
+	public MemberVO getMember(MemberVO vo) {
+		System.out.println(vo.getMb_id());
+		return memberDAO.getMember(vo);
+	}
+
 	// 회원목록
 	@Override
 	public List<MemberVO> getMemberList(MemberVO vo) {
@@ -41,6 +47,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int totalMemberListCnt(MemberVO vo) {
 		return memberDAO.totalMemberListCnt(vo);
+	}
+
+	@Override
+	public int deleteMember(MemberVO vo) {
+		return memberDAO.deleteMember(vo);
+	}
+
+	@Override
+	public void updateMember(MemberVO vo) {
+		memberDAO.updateMember(vo);
 	}
 
 }

@@ -13,11 +13,13 @@
 <br>
 <br>
 <a href="/getMemberList">회원목록</a>
+<a href="/mypage">마이페이지</a>
 <!-- <a href="/getMemberList">회원 결제</a> -->
 <!-- <a href="/getMemberList">관리자 결제목록</a> -->
 <a href="/getCouponList"> 쿠폰목록</a>
 <a href="/pay">관리자 결제목록</a>
-<a href="/login_kakao">카카오로그인</a>
+<a href="/login/kakao">카카오로그인</a>
+<a href="/login/naver">네이버로그인</a>
 <a href="/payUser">회원 결제</a>
 <a href="./myPayList">회원 결제 목록</a>
 <a href="login.jsp">로그인</a>
