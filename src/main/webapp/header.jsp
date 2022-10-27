@@ -35,6 +35,7 @@
 				<a class="dropdown-item" href="/">Separated link</a>
 			</div></li>
 		<li class="nav-item"><span class="nav-link">${userId}님 안녕하세요</span></li>
+		<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 		<li class="nav-item"><a class="nav-link" href="/">Link</a></li>
 		<li class="nav-item"><a class="nav-link disabled">Disabled</a></li>
 	</ul>
