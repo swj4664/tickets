@@ -8,6 +8,7 @@
 <!--    <context:component-scan base-package="com.ticket.biz"></context:component-scan> -->
    
    <bean id="couponvo" class="com.ticket.biz.coupon.CouponVO"/>
+   <bean id="couponboxvo" class="com.ticket.biz.couponbox.CouponBoxVO"/>
    
  
    <!-- DataSource 설정 -->

@@ -42,7 +42,7 @@ public class MemberDAO {
 	}
 
 	public MemberVO loginCheck(MemberVO vo) {
-		return mybatis.selectOne("MemberDAO.loginCheck", vo);
+		return mybatis.selectOne("MemberDAO.login", vo);
 	}
 
 	// 회원목록 조회

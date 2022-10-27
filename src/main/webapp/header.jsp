@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="./css/style.css">
 <title>헤더입니다.</title>
 </head>
+
 <nav class="navbar navbar-expand-sm navbar-light header-navbar"
 	data-toggle="affix">
 	<a class="navbar-brand logoimg" href="index.jsp">
@@ -56,4 +57,35 @@
 		</c:choose>
 	</ul>
 </nav>
+
+<body>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Active</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/insertMember.jsp">회원가입</a>
+      <a class="dropdown-item" href="/login.jsp">로그인</a>
+      <a class="dropdown-item" href="/">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="/">Separated link</a>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled">Disabled</a>
+  </li>
+    <li class="nav-item">
+    ${userId}님
+  </li>
+      <li class="nav-item">
+   <a href="/logout">로그아웃</a> 
+  </li>
+</ul>
+</body>
+>>>>>>> a9ef3c3025b6130b83d74b570751617e4d0f5fc2
 </html>
