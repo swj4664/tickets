@@ -5,7 +5,7 @@
    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
    
-<!--    <context:component-scan base-package="com.ticket.biz"></context:component-scan> -->
+   <context:component-scan base-package="com.ticket.biz"></context:component-scan>
    
    <bean id="couponvo" class="com.ticket.biz.coupon.CouponVO"/>
    <bean id="couponboxvo" class="com.ticket.biz.couponbox.CouponBoxVO"/>
