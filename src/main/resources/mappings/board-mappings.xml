@@ -27,9 +27,7 @@
 <insert id="insertBoard">
   INSERT INTO NOTICE (NOTI_TITLE, NOTI_WRITER, NOTI_CONTENT,
   NOTI_DATE, NOTI_CATEGORY, NOTI_MODIFY, NOTI_SECRET) 
-  VALUES ( #{noti_title}, #{noti_writer},
-             #{noti_content}, now(),
-  			#{noti_category}, now(), #{noti_secret})
+  VALUES ( #{noti_title}, #{noti_writer}, #{noti_content}, now(), #{noti_category}, now(), #{noti_secret})
 </insert>
 
 <update id="updateBoard">

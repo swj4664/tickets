@@ -11,7 +11,6 @@ div#btnBox{text-align:center;}
 </style>
 <script>
 
-
 function getboard(val){
 	location.href="getBoard?noti_no="+val;
 
