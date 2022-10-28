@@ -1,7 +1,6 @@
 package com.ticket.biz.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -39,8 +38,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ticket.biz.common.PagingVO;
-import com.ticket.biz.coupon.CouponVO;
-import com.ticket.biz.member.MemberVO;
+import com.ticket.biz.couponbox.CouponBoxService;
+import com.ticket.biz.couponbox.CouponBoxVO;
 import com.ticket.biz.pay.PayService;
 import com.ticket.biz.pay.PayVO;
 
@@ -139,11 +138,22 @@ public class PayController {
          System.err.println("환불실패");
          return -1;
       } else {
-    	  payService.updatePay(vo);
+         payService.updatePay(vo);
          System.err.println("환불성공");
          return 1; 
       } 
    }
+   
+//   // 나의 결제내역 취소시키기
+//   @RequestMapping("/mypaycan")
+//   public String deletemypay(PayVO vo, HttpSession session) {
+//      vo = payService.getPay(vo);
+//      payService.deletePay(vo);
+//         return "redirect:myPay";
+//
+//   }
+   
+   
    
    //상품결제 폼 호출 (관리자 결제목록)
    @RequestMapping(value={"/pay"}, method=RequestMethod.GET)
@@ -155,8 +165,35 @@ public class PayController {
    }
    
    //상품결제 폼 호출 (회원 결제)
+   @Autowired
+   private CouponBoxService couponBoxService;
+   
+   
       @RequestMapping(value={"/payUser"}, method=RequestMethod.GET)
-      public String pay1(HttpServletRequest request, Model model) {
+      public String pay1(HttpServletRequest request, Model model, String nowPageBtn, HttpSession session, CouponBoxVO vo) {
+         vo.setMb_id((String)session.getAttribute("mb_Id")); 
+        //총 목록 수
+        int totalPageCnt = couponBoxService.myCouponListCnt(vo);
+        //현재 페이지 설정
+        int nowPage = Integer.parseInt(nowPageBtn==null || nowPageBtn.equals("") ? "1" :nowPageBtn);
+        System.out.println("totalPageCnt: "+totalPageCnt +", nowPage: "+nowPage);
+        //한페이지당 보여줄 목록 수
+        int onePageCnt = 10;
+        //한 번에 보여질 버튼 수
+        int oneBtnCnt = 5;
+
+        PagingVO pvo = new PagingVO(totalPageCnt, onePageCnt, nowPage, oneBtnCnt);
+        vo.setOffset(pvo.getOffset());
+
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+         String today = sdf.format(now);
+        
+        
+        model.addAttribute("today",today); 
+        model.addAttribute("paging", pvo);
+        model.addAttribute("couponList", couponBoxService.myCouponList(vo));
+         
          String nm = request.getParameter("unm");
          // 값은 아임포트의 가맹점 식별코드 입력
          model.addAttribute("impKey", "imp32470313"); 
@@ -168,10 +205,10 @@ public class PayController {
    //결제 진행 폼=> 이곳에서 DB저장 로직도 추가하기
    @RequestMapping(value="/payUserDB", method=RequestMethod.POST)
    public String payment(HttpServletRequest request, HttpSession session, HttpServletResponse response, Model model,PayVO vo) throws IOException {
-	   String nm = request.getParameter("buyer");
-	   String p_id = request.getParameter("p_id");
-	   String amount = request.getParameter("amount");
-	   System.out.println(amount);
+      String nm = request.getParameter("buyer");
+      String p_id = request.getParameter("p_id");
+      String amount = request.getParameter("amount");
+      System.out.println(amount);
 //      int amount = Integer.parseInt(request.getParameter("amount"));
       String mid = request.getParameter("mid");
       String buyer_tel = request.getParameter("buyer_tel");
@@ -189,7 +226,7 @@ public class PayController {
        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT+9")); 
        String StartDatetime = sdf.format(date);
    
-      String mb_id=(String) session.getAttribute("userId");
+      String mb_id=(String) session.getAttribute("mb_Id");
       vo.setAmount(Integer.parseInt(amount));
       vo.setBuyer(nm);
       vo.setBuyer_email(buyer_email);
@@ -207,14 +244,14 @@ public class PayController {
      return "redirect:getPayList";
    }
     
-   // 나의 구매내역 보기	
+   // 나의 구매내역 보기   
    @RequestMapping("/getPayList")
-	public String getPayList(PayVO vo, Model model, HttpSession session) {
-		System.out.println("나의 구매내역");
-		vo.setMb_id((String) session.getAttribute("userId"));
-		model.addAttribute("myPayList", payService.getPayList(vo));
-		return "views/myPay";
-	}
+   public String getPayList(PayVO vo, Model model, HttpSession session) {
+      System.out.println("나의 구매내역");
+      vo.setMb_id((String) session.getAttribute("mb_Id"));
+      model.addAttribute("myPayList", payService.getPayList(vo));
+      return "views/myPay";
+   }
 
    
    
@@ -340,7 +377,7 @@ public class PayController {
       return list; 
    } 
     
-    
+  
    
    
    // 아임포트 전체 목록 반환 

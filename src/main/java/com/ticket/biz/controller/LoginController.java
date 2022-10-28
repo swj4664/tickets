@@ -17,7 +17,7 @@ public class LoginController {
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/logincheck", method = RequestMethod.POST)
 	public String login(MemberVO vo, HttpSession session) {
 		System.out.println("로그인 인증 처리...");
 		if (vo.getMb_id() == null || vo.getMb_id().equals("")) {
@@ -35,8 +35,9 @@ public class LoginController {
 	}
 
 	
-	  @RequestMapping("/logoutGO") public String logout(HttpSession session) {
-	  session.invalidate(); return "redirect:login.jsp"; }
-	 
+	  @RequestMapping("/logoutGo") 
+	  public String logout(HttpSession session) {
+	  session.invalidate(); 
+	  return "redirect:login.jsp"; }
 
 }

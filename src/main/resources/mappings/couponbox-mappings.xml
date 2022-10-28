@@ -26,7 +26,7 @@ AND MB_ID=#{mb_id};
 </select>
 
  <select id="myCouponList" resultType="coupon">
-      SELECT * FROM C_BOX cb,COUPON c
+      SELECT * FROM C_BOX cb, COUPON c
 		 WHERE 1=1
 		 AND CB.C_NUM= C.C_NUM 
 		 AND CB.MB_ID=#{mb_id}

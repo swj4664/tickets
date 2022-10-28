@@ -2,7 +2,7 @@
 <%-- <%@ include file="../../header.jsp" %> --%>
 <%
 	String sts = "";
-	if(session.getAttribute("userId") == null){
+	if(session.getAttribute("mb_Id") == null){
 		 sts = "disabled";
 	}
 %>

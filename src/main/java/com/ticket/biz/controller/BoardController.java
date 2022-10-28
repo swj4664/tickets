@@ -71,7 +71,7 @@ public class BoardController {
 	@RequestMapping("/updateBoard")
 	public String updateBoard(@ModelAttribute("board") BoardVO vo, HttpSession session) {
 		System.out.println("글 수정 기능 전");
-		if( vo.getNoti_writer().equals(session.getAttribute("userId").toString()) ){
+		if( vo.getNoti_writer().equals(session.getAttribute("mb_Id").toString()) ){
 			
 			boardService.updateBoard(vo);
 			return "redirect:getBoardList";

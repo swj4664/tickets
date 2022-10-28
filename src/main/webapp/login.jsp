@@ -31,7 +31,7 @@
 				out.println("</div>");
 			}
 			%>
-			<form class="form-signin" action="login" method="post">
+			<form class="form-signin" action="logincheck" method="post">
 				<div class="form-group">
 					<label for="inputUserName" class="sr-only">User Name</label>
 					<!-- 					name속성(파라미터) 있어야 데이터 전송됨  -->

@@ -50,7 +50,7 @@ function getboard(val){
 <c:forEach items="${boardList}" var="board">
 	<c:if test="${board.noti_secret eq 'true'}">
 	<c:choose>
-	<c:when test="${board.noti_writer eq session.getAtrribute('userId') or session.getAttribute('userId') eq 'admin'}">
+	<c:when test="${board.noti_writer eq session.getAtrribute('mb_Id') or session.getAttribute('mb_Id') eq 'admin'}">
 		<td >${board.noti_no }</td>
 	
 	  <td>${board.noti_title}</td>

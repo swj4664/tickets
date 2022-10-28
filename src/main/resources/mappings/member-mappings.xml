@@ -24,7 +24,7 @@
 		MB_ID = #{mb_id}
 	</update>
 	<!-- 로그인 -->
-	<select id="loginCheck" resultType="member">SELECT * FROM MEMBER WHERE
+	<select id="login" resultType="member">SELECT * FROM MEMBER WHERE
 		MB_ID = #{mb_id} AND MB_PW = #{mb_pw} </select>
 
 	<!-- 멤버조회 -->
