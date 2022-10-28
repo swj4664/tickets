@@ -54,4 +54,9 @@ public class MemberServiceImpl implements MemberService {
 	      System.out.println(vo.getMb_id());
 	      return memberDAO.getMember(vo);
 	   }
+
+	@Override
+	public void updateMember(MemberVO vo) {
+		memberDAO.updateMember(vo);
+	}
 }

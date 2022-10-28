@@ -11,11 +11,12 @@ public interface MemberService {
 	void insertMember(MemberVO vo);
 	/*회원수정*/
 	void updateMember(MemberVO vo);
-	MemberVO getMember(MemberVO vo);
 
 	/*회원탈퇴*/
 	int deleteMember(MemberVO vo);
+	
 	public MemberVO loginCheck(MemberVO vo);
+	
 	public void logout(HttpSession session);
 
 	// 회원목록 조회
@@ -23,7 +24,6 @@ public interface MemberService {
 
 	int totalMemberListCnt(MemberVO vo);
 	
-	int deleteMember(MemberVO vo);
 	
 	/*회원 마이페이지*/
 	   MemberVO getMember(MemberVO vo);

@@ -56,15 +56,5 @@ public class MemberDAO {
 		return mybatis.selectOne("MemberDAO.totalMemberListCnt", vo);
 	}
 	
-	// 회원탈퇴
-	public int deleteMember(MemberVO vo) {
-		return mybatis.delete("MemberDAO.deleteMember", vo);
-	}
-	
-	   /*회원조회*/
-	   public MemberVO getMember(MemberVO vo) {
-	      System.out.println("mybatis getMember() 기능");
-	      return mybatis.selectOne("MemberDAO.getMember", vo);
-	   }
 
 }
