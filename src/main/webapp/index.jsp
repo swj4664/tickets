@@ -22,6 +22,7 @@
 <a href="./myPayList">회원 결제 목록</a>
 <a href="login.jsp">로그인</a>
 <a href="insertMember.jsp">회원가입</a>
+<a href="getExhibitionList">관리자전시목록</a>
 
 
 
