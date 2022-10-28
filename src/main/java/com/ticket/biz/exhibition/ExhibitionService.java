@@ -19,8 +19,14 @@ public interface ExhibitionService {
 			
 			// 전시 목록 조회
 			List<ExhibitionVO> getExhibitionList(ExhibitionVO vo);
-			
+
 			// 전시 목록 개수 조회
 			int totalExhibitionListCnt(ExhibitionVO vo);
+			
+			// 유저 전시 목록 조회
+			List<ExhibitionVO> getUserExhibitionList(ExhibitionVO vo);
+			
+			// 유저 전시 목록 개수 조회
+			int totalUSerExhibitionListCnt(ExhibitionVO vo);
 
 	}
