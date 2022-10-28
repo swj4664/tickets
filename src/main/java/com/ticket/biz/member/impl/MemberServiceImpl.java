@@ -1,6 +1,7 @@
 package com.ticket.biz.member.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,12 +33,6 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.insertMember(vo);
 	}
 
-	@Override
-	public MemberVO getMember(MemberVO vo) {
-		System.out.println(vo.getMb_id());
-		return memberDAO.getMember(vo);
-	}
-
 	// 회원목록
 	@Override
 	public List<MemberVO> getMemberList(MemberVO vo) {
@@ -48,15 +43,15 @@ public class MemberServiceImpl implements MemberService {
 	public int totalMemberListCnt(MemberVO vo) {
 		return memberDAO.totalMemberListCnt(vo);
 	}
-
+	
 	@Override
 	public int deleteMember(MemberVO vo) {
 		return memberDAO.deleteMember(vo);
 	}
-
-	@Override
-	public void updateMember(MemberVO vo) {
-		memberDAO.updateMember(vo);
-	}
-
+	
+	   @Override
+	   public MemberVO getMember(MemberVO vo) {
+	      System.out.println(vo.getMb_id());
+	      return memberDAO.getMember(vo);
+	   }
 }
