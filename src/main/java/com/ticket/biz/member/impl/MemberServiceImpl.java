@@ -43,20 +43,33 @@ public class MemberServiceImpl implements MemberService {
 	public int totalMemberListCnt(MemberVO vo) {
 		return memberDAO.totalMemberListCnt(vo);
 	}
-	
+
 	@Override
 	public int deleteMember(MemberVO vo) {
 		return memberDAO.deleteMember(vo);
 	}
-	
-	   @Override
-	   public MemberVO getMember(MemberVO vo) {
-	      System.out.println(vo.getMb_id());
-	      return memberDAO.getMember(vo);
-	   }
+
+	@Override
+	public MemberVO getMember(MemberVO vo) {
+		return memberDAO.getMember(vo);
+	}
 
 	@Override
 	public void updateMember(MemberVO vo) {
 		memberDAO.updateMember(vo);
+	}
+
+	@Override
+	public int idChk(Map<String, Object> param) {
+		return memberDAO.idChk(param);
+	}
+
+	// 비밀번호 찾기
+//	public String findPw(Map<String, Object> param) {
+//		return memberDAO.findPw(param);
+//	}
+	
+	public List<MemberVO> findPw(MemberVO vo){
+		return memberDAO.findPw(vo);
 	}
 }

@@ -1,6 +1,7 @@
 package com.ticket.biz.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -39,7 +40,7 @@ public class MemberController {
 		conditionMap.put("이메일", "MB_EMAIL");
 		return conditionMap;
 	}
-	
+
 	   // 회원 마이페이지
 	   @RequestMapping(value="/mypage")
 	   public String getMyPage(MemberVO vo, Model model) {
@@ -55,16 +56,15 @@ public class MemberController {
 		memberService.insertMember(vo);
 		return "redirect:index.jsp";
 	}
-	
+
 	// 회원탈퇴
 	/* @ResponseBody */
-		@RequestMapping(value="/deleteMember")
-		public String deleteMember(MemberVO vo, HttpSession session) {
-			session.invalidate();
+	@RequestMapping(value="/deleteMember")
+	public String deleteMember(MemberVO vo, HttpSession session) {
+		session.invalidate();
 		int result = memberService.deleteMember(vo);
-		System.out.println(result);
 		return "redirect:login.jsp";
-		}
+	}
 
 	//관리자 회원조회
 	@RequestMapping("/getMemberList")
@@ -91,7 +91,25 @@ public class MemberController {
 		model.addAttribute("memberList", memberService.getMemberList(vo));
 		return "admin/getMemberList";
 	}
-
+	
+	// 아이디 중복 검사
+	@ResponseBody
+	@RequestMapping(value = "/idChk", method = RequestMethod.POST)
+	public int idChk(@RequestParam Map<String, Object> param) {
+//		int result = memberService.idChk(param);
+		return memberService.idChk(param);
+	}
+	
+	// 비밀번호찾기
+	@ResponseBody
+	@RequestMapping(value = "/findPw", method = RequestMethod.POST)
+	public Object findPw(MemberVO vo, Model model) { //object 최고 자료형, 객체 자료형. map list는 객체 자료형이기 때문에
+		//List<MemberVO> ml = memberService.findPw(vo);
+		//Map<String, Object> map = new HashMap<String, Object>();
+		//map.put("mMeberInfo", ml);
+		
+		return memberService.findPw(vo).get(0);
+	}
 
 	@Autowired
 	MailSender sender;

@@ -167,6 +167,26 @@ html, body {
 }
 </style>
 <script>
+function chkBtn(){
+	
+	$.ajax({
+		url : "/idChk", // form의 action을 씀
+		type : "post", // get - url뒤에 parameter를 붙여서 보냄.(정보가 다 보임) / post - 정보가 보이지 않음
+		// www.google.com/search?q=신원정&rlz=1C1IBEF_koKR1012KR1012 -물음표로 시작하고 id=값 다음은 &로 나눔
+		dataType : "json", 
+		data : {"mb_id" : $("#mb_id").val()},  // <- 이게jason타입임. map이랑 형태 같음
+		success : function(data){ // success - callback함수(모든게 돌고(리턴까지) 나서 실행되는 것. 의도하지 않은 것이 실행되도 콜백함수임)
+// 			debugger; 벌레모양은 서버단에서. 브레이크 포인트 찍히면 오류 안난것.
+			if(data == 1){
+				alert("중복된 아이디입니다.");
+			}else if(data == 0){
+				$("#idChk").attr("value", "Y");
+				alert("사용가능한 아이디입니다.");
+			}
+		}
+	})
+	
+}
 	$(function() {
 		//핸드폰 번호 인증 
 		var code2 = "";
@@ -279,10 +299,27 @@ html, body {
 				}
 			});
 		}
+		
+		
+		$("#phoneChk2").click(function() {
+			if ($("#phone2").val() == code2) {
+				$(".successPhoneChk").text("인증번호가 일치합니다.");
+				$(".successPhoneChk").css("color", "green");
+				$("#phoneDoubleChk").val("true");
+				$("#phone2").attr("disabled", true);
+			} else {
+				$(".successPhoneChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
+				$(".successPhoneChk").css("color", "red");
+				$("#phoneDoubleChk").val("false");
+				$(this).attr("autofocus", true);
+			}
+		});
+		
 	}
 	/* 이메일 인증번호 일치 여부 start */
 </script>
 </head>
+
 <body>
 	<!-- 	<div class="jumbotron member-jumbo">
 		<h1>멤버등록</h1>
@@ -298,11 +335,12 @@ html, body {
 							<form class="requires-validation" action="insertMember"
 								method="post">
 								<div class="col-md-12">
-									<input type="text" class="form-control" name="mb_id"
+									<input type="text" class="form-control" name="mb_id" id="mb_id"
 										placeholder="아이디" required>
-									<div class="valid-feedback">유효한아이디입니다.</div>
-									<div class="invalid-feedback">공백없이 입력해주세요</div>
-
+									<button type="button" id='idChk' class='btn btn-primary btn-sm'
+											onclick='chkBtn()'>중복확인</button>
+<!-- 									<div class="valid-feedback">유효한아이디입니다.</div> -->
+<!-- 									<div class="invalid-feedback">공백없이 입력해주세요</div> -->
 								</div>
 								<div class="col-md-12">
 									<input type="password" class="form-control" name="mb_pw"

@@ -14,17 +14,24 @@ public interface MemberService {
 
 	/*회원탈퇴*/
 	int deleteMember(MemberVO vo);
-	
+
 	public MemberVO loginCheck(MemberVO vo);
-	
+
 	public void logout(HttpSession session);
 
 	// 회원목록 조회
 	List<MemberVO> getMemberList(MemberVO vo);
 
 	int totalMemberListCnt(MemberVO vo);
-	
-	
+
+
 	/*회원 마이페이지*/
+	
 	   MemberVO getMember(MemberVO vo);
+	
+	// 아이디 중복체크
+	int idChk(Map<String, Object> param);
+	
+	// 비밀번호 찾기
+	List<MemberVO> findPw(MemberVO vo);
 }
