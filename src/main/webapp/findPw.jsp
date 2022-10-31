@@ -16,13 +16,10 @@ function findPwBtn(){
 	var email = $("#mb_email");
 	
 	$.ajax({
-		url : "/findPw", // form의 action을 씀
-		type : "post", // get - url뒤에 parameter를 붙여서 보냄.(정보가 다 보임) / post - 정보가 보이지 않음
-		// www.google.com/search?q=신원정&rlz=1C1IBEF_koKR1012KR1012 -물음표로 시작하고 id=값 다음은 &로 나눔
-		/* dataType : "json",  */
-		data : {"mb_id" : $("#findPw").val()},  // <- 이게jason타입임. map이랑 형태 같음. findId의 값을 mb_id에 넣는다.
-		success : function(mMeberInfo){ // success - callback함수(모든게 돌고(리턴까지) 나서 실행되는 것. 의도하지 않은 것이 실행되도 콜백함수임)
-			
+		url : "/findPw",
+		type : "post", 
+		data : {"mb_id" : $("#findPw").val()},
+		success : function(mMeberInfo){ 
 			if(mMeberInfo) { //순서가 왜 중요한지?
 			alert(
 					"비밀번호는"+mMeberInfo.mb_pw+"입니다.\n" 
