@@ -170,12 +170,13 @@ html, body {
 function chkBtn(){
 	
 	$.ajax({
-		url : "/idChk", 
-		type : "post", 
-	
+		url : "/idChk", // form의 action을 씀
+		type : "post", // get - url뒤에 parameter를 붙여서 보냄.(정보가 다 보임) / post - 정보가 보이지 않음
+		// www.google.com/search?q=신원정&rlz=1C1IBEF_koKR1012KR1012 -물음표로 시작하고 id=값 다음은 &로 나눔
 		dataType : "json", 
-		data : {"mb_id" : $("#mb_id").val()}, 
-		success : function(data){ 
+		data : {"mb_id" : $("#mb_id").val()},  // <- 이게jason타입임. map이랑 형태 같음
+		success : function(data){ // success - callback함수(모든게 돌고(리턴까지) 나서 실행되는 것. 의도하지 않은 것이 실행되도 콜백함수임)
+// 			debugger; 벌레모양은 서버단에서. 브레이크 포인트 찍히면 오류 안난것.
 			if(data == 1){
 				alert("중복된 아이디입니다.");
 			}else if(data == 0){

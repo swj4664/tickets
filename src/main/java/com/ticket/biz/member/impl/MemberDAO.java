@@ -62,6 +62,10 @@ public class MemberDAO {
 	}
 	
 	// 비밀번호 찾기
+//	public List findPw(Map<String, Object> param) {
+//		return mybatis.selectList("MemberDAO.findPw", param);
+//	}
+	
 	public List<MemberVO> findPw(MemberVO vo){
 		return mybatis.selectList("MemberDAO.findPw",vo);
 	}
