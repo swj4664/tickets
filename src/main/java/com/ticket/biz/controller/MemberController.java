@@ -103,11 +103,10 @@ public class MemberController {
 	// 비밀번호찾기
 	@ResponseBody
 	@RequestMapping(value = "/findPw", method = RequestMethod.POST)
-	public Object findPw(MemberVO vo, Model model) { //object 최고 자료형, 객체 자료형. map list는 객체 자료형이기 때문에
+	public Object findPw(MemberVO vo, Model model) { 
 		//List<MemberVO> ml = memberService.findPw(vo);
 		//Map<String, Object> map = new HashMap<String, Object>();
 		//map.put("mMeberInfo", ml);
-		
 		return memberService.findPw(vo).get(0);
 	}
 

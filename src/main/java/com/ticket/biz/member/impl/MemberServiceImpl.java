@@ -65,9 +65,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	// 비밀번호 찾기
-//	public String findPw(Map<String, Object> param) {
-//		return memberDAO.findPw(param);
-//	}
 	
 	public List<MemberVO> findPw(MemberVO vo){
 		return memberDAO.findPw(vo);
